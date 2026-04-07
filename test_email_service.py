@@ -120,13 +120,6 @@ class TestBuildMessage(unittest.TestCase):
 
 
 class TestSendEmail(unittest.TestCase):
-    def _make_mock_smtp(self):
-        mock_server = MagicMock()
-        mock_smtp_cls = MagicMock()
-        mock_smtp_cls.return_value.__enter__ = MagicMock(return_value=mock_server)
-        mock_smtp_cls.return_value.__exit__ = MagicMock(return_value=False)
-        return mock_smtp_cls, mock_server
-
     @patch("email_service.smtplib.SMTP")
     def test_send_basic_email(self, mock_smtp_cls):
         mock_server = MagicMock()

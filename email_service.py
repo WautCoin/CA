@@ -77,11 +77,12 @@ def build_message(
     """
     Build a MIME email message with optional CC header and HTML body.
 
-    When *html_body* is provided the function builds a ``multipart/mixed``
-    message whose payload is a ``multipart/alternative`` part that carries
-    both a plain-text and an HTML alternative, following RFC 2046.  Mail
-    clients that support HTML will render the HTML part; others fall back to
-    the plain-text part.
+    The outer message is always ``multipart/mixed``.  When *html_body* is
+    provided its payload contains a single ``multipart/alternative`` part
+    that carries both a plain-text and an HTML alternative (RFC 2046), so
+    that mail clients that support HTML render the HTML part while others
+    fall back to plain text.  When *html_body* is ``None`` the payload is
+    simply a single ``text/plain`` part.
 
     Args:
         sender: The sender's email address.
